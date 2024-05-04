@@ -36,7 +36,7 @@ export class ContaService {
   }
 
   atualizar(conta: Conta): Observable<Conta> {
-    return this.clienteHttp.put<Conta>(`${this.api}${conta.id}`, conta);
+    return this.clienteHttp.put<Conta>(`${this.api}${conta.id}/`, conta);
   }
 
   saque(saque: SaqueDeposito): Observable<SaqueDeposito>{

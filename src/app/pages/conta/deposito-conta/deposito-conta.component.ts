@@ -44,35 +44,27 @@ export class DepositoContaComponent implements OnInit{
   }
 
   cadastrar() {
-    const valor = this.formGroup.value.valor; // Obtendo o valor do campo "valor"
-    const conta = this.formGroup.value.conta; // Obtendo o número da conta selecionada
-  
-    // Criando um objeto SaqueDeposito com o valor e o número da conta
-    const deposito: SaqueDeposito = {
-      valor: valor,
-      conta: conta
-    };
-  
-    // Enviando o objeto deposito para o serviço de depósito
-    this.contaService.deposito(deposito).subscribe({
-      next: () => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Sucesso',
-          text: 'Depósito registrado com sucesso!',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        this.router.navigate(['/conta']);
-      },
-      error: (error) => {
-        console.error(error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Erro ao registrar depósito!',
-        });
-      }
-    });
-  }
+    const deposito: SaqueDeposito = this.formGroup.value;
+      // Modo de criação
+      this.contaService.deposito(deposito).subscribe({
+        next: () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Sucesso',
+            text: 'Depósito registrado com sucesso!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.router.navigate(['/conta']);
+        },
+        error: (error) => {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Erro ao registrar depósito!',
+          });
+        }
+      });
+    }
 }
